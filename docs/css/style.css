@@ -1,0 +1,73 @@
+:root {
+  --bg-deep: #05070e;
+  --bg-panel: rgba(13, 18, 30, 0.82);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --cyan: #00f3ff;
+  --magenta: #ff007f;
+  --emerald: #10b981;
+  --amber: #f59e0b;
+  --violet: #8b5cf6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-deep);
+  background-image:
+    radial-gradient(circle at 10% 12%, rgba(0, 243, 255, 0.07), transparent 30%),
+    radial-gradient(circle at 90% 85%, rgba(139, 92, 246, 0.08), transparent 32%);
+  color: #e2e8f0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.glass-panel {
+  background: var(--bg-panel);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
+}
+
+.scan-dropzone {
+  border: 2px dashed rgba(0, 243, 255, 0.3);
+  transition: all 0.25s ease;
+}
+
+.scan-dropzone:hover, .scan-dropzone.dragover {
+  border-color: var(--cyan);
+  background: rgba(0, 243, 255, 0.05);
+}
+
+/* Pulsing badge */
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 0.3; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+.pulse-badge {
+  animation: pulse-ring 2s infinite ease-in-out;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.25);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 243, 255, 0.4);
+}

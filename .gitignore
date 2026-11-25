@@ -1,0 +1,50 @@
+# ==============================================================================
+# MedVision-LLM Public Showcase Repository (.gitignore)
+# Source code, weights, and datasets are withheld from public download
+# and made available upon reasonable academic request.
+# ==============================================================================
+
+# All Python source code & dependencies
+*.py
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+requirements.txt
+venv/
+env/
+.venv/
+
+# Model weights & checkpoints
+models/
+checkpoints/
+checkpoints_v2/
+*.pt
+*.pth
+*.onnx
+*.bin
+*.safetensors
+
+# Datasets & raw files
+data/
+*.csv
+*.npz
+*.mat
+*.zip
+*.tar.gz
+
+# Local server / development frontend
+web/
+
+# Secrets, environment & logs
+.env
+.env.*
+*.log
+*.tmp
+
+# OS & IDE files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini

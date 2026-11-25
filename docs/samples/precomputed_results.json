@@ -1,0 +1,524 @@
+{
+  "samples": [
+    {
+      "id": "sample_2",
+      "category": "glioma_tumor",
+      "label": "Glioma Tumor (Brain Parenchyma)",
+      "severity": "High",
+      "filename": "image(59).jpg",
+      "url": "samples/sample_2_glioma_tumor_image_59.jpg",
+      "default_prediction": {
+        "prompt": "Scan: Brain MRI | Task: Analyze clinical case and diagnose",
+        "raw_output": "{\"diagnosis\":\"glioma\",\"severity\":\"high\",\"finding\":\"hyperintense frontal lobe mass demonstrating expansile growthout clear margins\",\"modality\":\"brain mri\",\"clinical_case\":\"adult presenting withotho",
+        "modality": "Brain Mri",
+        "diagnosis": "Glioma",
+        "visual_prediction": "Pituitary Adenoma",
+        "visual_confidence": "41.8%",
+        "finding": "hyperintense frontal lobe mass demonstrating expansile growthout clear margins",
+        "severity": "High",
+        "clinical_case": "adult presenting withotho",
+        "recommendations": "Neurosurgical consultation and clinical follow-up imaging.",
+        "class_probabilities": {
+          "Glioma": "31.9%",
+          "Meningioma": "25.7%",
+          "Pituitary Adenoma": "41.8%",
+          "Normal Brain MRI": "0.7%"
+        },
+        "model_metadata": {
+          "parameters": "6.4M",
+          "backbone": "ConvNeXt Visual Stem",
+          "decoder": "Causal Multimodal Transformer",
+          "device": "cuda"
+        }
+      },
+      "predictions_by_prompt": {
+        "Scan: Brain MRI | Task: Analyze clinical case and diagnose": {
+          "prompt": "Scan: Brain MRI | Task: Analyze clinical case and diagnose",
+          "raw_output": "{\"diagnosis\":\"glioma\",\"severity\":\"high\",\"finding\":\"hyperintense frontal lobe mass demonstrating expansile growthout clear margins\",\"modality\":\"brain mri\",\"clinical_case\":\"adult presenting withotho",
+          "modality": "Brain Mri",
+          "diagnosis": "Glioma",
+          "visual_prediction": "Pituitary Adenoma",
+          "visual_confidence": "41.8%",
+          "finding": "hyperintense frontal lobe mass demonstrating expansile growthout clear margins",
+          "severity": "High",
+          "clinical_case": "adult presenting withotho",
+          "recommendations": "Neurosurgical consultation and clinical follow-up imaging.",
+          "class_probabilities": {
+            "Glioma": "31.9%",
+            "Meningioma": "25.7%",
+            "Pituitary Adenoma": "41.8%",
+            "Normal Brain MRI": "0.7%"
+          },
+          "model_metadata": {
+            "parameters": "6.4M",
+            "backbone": "ConvNeXt Visual Stem",
+            "decoder": "Causal Multimodal Transformer",
+            "device": "cuda"
+          }
+        },
+        "Scan: Brain MRI | Question: Explain the clinical case and what happened": {
+          "prompt": "Scan: Brain MRI | Question: Explain the clinical case and what happened",
+          "raw_output": "{\"diagnosis\":\"glioma\",\"severity\":\"high\",\"finding\":\"hyperintense frontal lobe mass demonstrating expansile growthout clear margins\",\"modality\":\"brain mri\",\"clinical_case\":\":\":",
+          "modality": "Brain Mri",
+          "diagnosis": "Pituitary Adenoma",
+          "visual_prediction": "Pituitary Adenoma",
+          "visual_confidence": "41.8%",
+          "finding": "Neuroimaging lesion identified corresponding to primary pathology.",
+          "severity": "Moderate",
+          "clinical_case": "{\"diagnosis\":\"glioma\",\"severity\":\"high\",\"finding\":\"hyperintense frontal lobe mass demonstrating expansile growthout clear margins\",\"modality\":\"brain mri\",\"clinical_case\":\":\":",
+          "recommendations": "Neurosurgical consultation and clinical follow-up imaging.",
+          "class_probabilities": {
+            "Glioma": "31.9%",
+            "Meningioma": "25.7%",
+            "Pituitary Adenoma": "41.8%",
+            "Normal Brain MRI": "0.7%"
+          },
+          "model_metadata": {
+            "parameters": "6.4M",
+            "backbone": "ConvNeXt Visual Stem",
+            "decoder": "Causal Multimodal Transformer",
+            "device": "cuda"
+          }
+        },
+        "Scan: Brain MRI | Query: What pathology is visible in this scan?": {
+          "prompt": "Scan: Brain MRI | Query: What pathology is visible in this scan?",
+          "raw_output": "{\"diagnosis\":\"glioma\",\"severity\":\"high\",\"finding\":\"hyperintense frontal lobe mass demonstrating expansile growthout clear margins\",\"modality\":\"brain mri\",\"clinical_case\":\"adult presenting witho",
+          "modality": "Brain Mri",
+          "diagnosis": "Glioma",
+          "visual_prediction": "Pituitary Adenoma",
+          "visual_confidence": "41.8%",
+          "finding": "hyperintense frontal lobe mass demonstrating expansile growthout clear margins",
+          "severity": "High",
+          "clinical_case": "adult presenting witho",
+          "recommendations": "Neurosurgical consultation and clinical follow-up imaging.",
+          "class_probabilities": {
+            "Glioma": "31.9%",
+            "Meningioma": "25.7%",
+            "Pituitary Adenoma": "41.8%",
+            "Normal Brain MRI": "0.7%"
+          },
+          "model_metadata": {
+            "parameters": "6.4M",
+            "backbone": "ConvNeXt Visual Stem",
+            "decoder": "Causal Multimodal Transformer",
+            "device": "cuda"
+          }
+        },
+        "Scan: Brain MRI | Clinical Request: Provide diagnosis, severity, and recommendations": {
+          "prompt": "Scan: Brain MRI | Clinical Request: Provide diagnosis, severity, and recommendations",
+          "raw_output": "{\"diagnosis\":\"glioma\",\"severity\":\"high\",\"finding\":\"hyperintense frontal lobe mass demonstrating expansile growthout clear margins\",\"modality\":\"brain mri\",\"clinical_case\":\"adult presenting with withot",
+          "modality": "Brain Mri",
+          "diagnosis": "Glioma",
+          "visual_prediction": "Pituitary Adenoma",
+          "visual_confidence": "41.8%",
+          "finding": "hyperintense frontal lobe mass demonstrating expansile growthout clear margins",
+          "severity": "High",
+          "clinical_case": "adult presenting with withot",
+          "recommendations": "Neurosurgical consultation and clinical follow-up imaging.",
+          "class_probabilities": {
+            "Glioma": "31.9%",
+            "Meningioma": "25.7%",
+            "Pituitary Adenoma": "41.8%",
+            "Normal Brain MRI": "0.7%"
+          },
+          "model_metadata": {
+            "parameters": "6.4M",
+            "backbone": "ConvNeXt Visual Stem",
+            "decoder": "Causal Multimodal Transformer",
+            "device": "cuda"
+          }
+        }
+      }
+    },
+    {
+      "id": "sample_4",
+      "category": "meningioma_tumor",
+      "label": "Meningioma (Dural-Based)",
+      "severity": "Moderate",
+      "filename": "image(10).jpg",
+      "url": "samples/sample_4_meningioma_tumor_image_10.jpg",
+      "default_prediction": {
+        "prompt": "Scan: Brain MRI | Task: Analyze clinical case and diagnose",
+        "raw_output": "{\"diagnosis\":\"meningioma\",\"severity\":\"moderate\",\"finding\":\"well-circumscribed extra-axial dural-based mass along convexity with dural tail sign\",\"modality\":\"brain mri\",\"clinical_case\":\"patient presented with penst",
+        "modality": "Brain Mri",
+        "diagnosis": "Meningioma",
+        "visual_prediction": "Meningioma",
+        "visual_confidence": "85.7%",
+        "finding": "well-circumscribed extra-axial dural-based mass along convexity with dural tail sign",
+        "severity": "Moderate",
+        "clinical_case": "patient presented with penst",
+        "recommendations": "Neurosurgical consultation and clinical follow-up imaging.",
+        "class_probabilities": {
+          "Glioma": "0.3%",
+          "Meningioma": "85.7%",
+          "Pituitary Adenoma": "2.9%",
+          "Normal Brain MRI": "11.1%"
+        },
+        "model_metadata": {
+          "parameters": "6.4M",
+          "backbone": "ConvNeXt Visual Stem",
+          "decoder": "Causal Multimodal Transformer",
+          "device": "cuda"
+        }
+      },
+      "predictions_by_prompt": {
+        "Scan: Brain MRI | Task: Analyze clinical case and diagnose": {
+          "prompt": "Scan: Brain MRI | Task: Analyze clinical case and diagnose",
+          "raw_output": "{\"diagnosis\":\"meningioma\",\"severity\":\"moderate\",\"finding\":\"well-circumscribed extra-axial dural-based mass along convexity with dural tail sign\",\"modality\":\"brain mri\",\"clinical_case\":\"patient presented with penst",
+          "modality": "Brain Mri",
+          "diagnosis": "Meningioma",
+          "visual_prediction": "Meningioma",
+          "visual_confidence": "85.7%",
+          "finding": "well-circumscribed extra-axial dural-based mass along convexity with dural tail sign",
+          "severity": "Moderate",
+          "clinical_case": "patient presented with penst",
+          "recommendations": "Neurosurgical consultation and clinical follow-up imaging.",
+          "class_probabilities": {
+            "Glioma": "0.3%",
+            "Meningioma": "85.7%",
+            "Pituitary Adenoma": "2.9%",
+            "Normal Brain MRI": "11.1%"
+          },
+          "model_metadata": {
+            "parameters": "6.4M",
+            "backbone": "ConvNeXt Visual Stem",
+            "decoder": "Causal Multimodal Transformer",
+            "device": "cuda"
+          }
+        },
+        "Scan: Brain MRI | Question: Explain the clinical case and what happened": {
+          "prompt": "Scan: Brain MRI | Question: Explain the clinical case and what happened",
+          "raw_output": "{\"diagnosis\":\"meningioma\",\"severity\":\"moderate\",\"finding\":\"well-circumscribed extra-axial dural-based mass along convexity with dural tail sign\",\"modality\":\"brain mri\",\"clinical_case\":\"patient",
+          "modality": "Brain Mri",
+          "diagnosis": "Meningioma",
+          "visual_prediction": "Meningioma",
+          "visual_confidence": "85.7%",
+          "finding": "well-circumscribed extra-axial dural-based mass along convexity with dural tail sign",
+          "severity": "Moderate",
+          "clinical_case": "patient",
+          "recommendations": "Neurosurgical consultation and clinical follow-up imaging.",
+          "class_probabilities": {
+            "Glioma": "0.3%",
+            "Meningioma": "85.7%",
+            "Pituitary Adenoma": "2.9%",
+            "Normal Brain MRI": "11.1%"
+          },
+          "model_metadata": {
+            "parameters": "6.4M",
+            "backbone": "ConvNeXt Visual Stem",
+            "decoder": "Causal Multimodal Transformer",
+            "device": "cuda"
+          }
+        },
+        "Scan: Brain MRI | Query: What pathology is visible in this scan?": {
+          "prompt": "Scan: Brain MRI | Query: What pathology is visible in this scan?",
+          "raw_output": "{\"diagnosis\":\"meningioma\",\"severity\":\"moderate\",\"finding\":\"well-circumscribed extra-axial dural-based mass along convexity with dural tail sign\",\"modality\":\"brain mri\",\"clinical_case\":\"patient presented with presented ",
+          "modality": "Brain Mri",
+          "diagnosis": "Meningioma",
+          "visual_prediction": "Meningioma",
+          "visual_confidence": "85.7%",
+          "finding": "well-circumscribed extra-axial dural-based mass along convexity with dural tail sign",
+          "severity": "Moderate",
+          "clinical_case": "patient presented with presented ",
+          "recommendations": "Neurosurgical consultation and clinical follow-up imaging.",
+          "class_probabilities": {
+            "Glioma": "0.3%",
+            "Meningioma": "85.7%",
+            "Pituitary Adenoma": "2.9%",
+            "Normal Brain MRI": "11.1%"
+          },
+          "model_metadata": {
+            "parameters": "6.4M",
+            "backbone": "ConvNeXt Visual Stem",
+            "decoder": "Causal Multimodal Transformer",
+            "device": "cuda"
+          }
+        },
+        "Scan: Brain MRI | Clinical Request: Provide diagnosis, severity, and recommendations": {
+          "prompt": "Scan: Brain MRI | Clinical Request: Provide diagnosis, severity, and recommendations",
+          "raw_output": "{\"diagnosis\":\"meningioma\",\"severity\":\"moderate\",\"finding\":\"well-circumscribed extra-axial dural-based mass along convexity with dural tail sign\",\"modality\":\"brain mri\",\"clinical_case\":\"patient presented with perssssp",
+          "modality": "Brain Mri",
+          "diagnosis": "Meningioma",
+          "visual_prediction": "Meningioma",
+          "visual_confidence": "85.7%",
+          "finding": "well-circumscribed extra-axial dural-based mass along convexity with dural tail sign",
+          "severity": "Moderate",
+          "clinical_case": "patient presented with perssssp",
+          "recommendations": "Neurosurgical consultation and clinical follow-up imaging.",
+          "class_probabilities": {
+            "Glioma": "0.3%",
+            "Meningioma": "85.7%",
+            "Pituitary Adenoma": "2.9%",
+            "Normal Brain MRI": "11.1%"
+          },
+          "model_metadata": {
+            "parameters": "6.4M",
+            "backbone": "ConvNeXt Visual Stem",
+            "decoder": "Causal Multimodal Transformer",
+            "device": "cuda"
+          }
+        }
+      }
+    },
+    {
+      "id": "sample_5",
+      "category": "pituitary_tumor",
+      "label": "Pituitary Macroadenoma (Sellar)",
+      "severity": "Moderate",
+      "filename": "image(1).jpg",
+      "url": "samples/sample_5_pituitary_tumor_image_1.jpg",
+      "default_prediction": {
+        "prompt": "Scan: Brain MRI | Task: Analyze clinical case and diagnose",
+        "raw_output": "{\"diagnosis\":\"pituitary adenoma\",\"severity\":\"moderate\",\"finding\":\"expanded sella turcica with homogeneous suprasellar mass extending toward chiasm\",\"modality\":\"brain mri\",\",\"clinical_case\":\"evaluation for galactorrhea and a",
+        "modality": "Brain Mri",
+        "diagnosis": "Pituitary Adenoma",
+        "visual_prediction": "Pituitary Adenoma",
+        "visual_confidence": "90.4%",
+        "finding": "Neuroimaging lesion identified corresponding to primary pathology.",
+        "severity": "Moderate",
+        "clinical_case": "{\"diagnosis\":\"pituitary adenoma\",\"severity\":\"moderate\",\"finding\":\"expanded sella turcica with homogeneous suprasellar mass extending toward chiasm\",\"modality\":\"brain mri\",\",\"clinical_case\":\"evaluation for galactorrhea and a",
+        "recommendations": "Neurosurgical consultation and clinical follow-up imaging.",
+        "class_probabilities": {
+          "Glioma": "0.3%",
+          "Meningioma": "7.5%",
+          "Pituitary Adenoma": "90.4%",
+          "Normal Brain MRI": "1.8%"
+        },
+        "model_metadata": {
+          "parameters": "6.4M",
+          "backbone": "ConvNeXt Visual Stem",
+          "decoder": "Causal Multimodal Transformer",
+          "device": "cuda"
+        }
+      },
+      "predictions_by_prompt": {
+        "Scan: Brain MRI | Task: Analyze clinical case and diagnose": {
+          "prompt": "Scan: Brain MRI | Task: Analyze clinical case and diagnose",
+          "raw_output": "{\"diagnosis\":\"pituitary adenoma\",\"severity\":\"moderate\",\"finding\":\"expanded sella turcica with homogeneous suprasellar mass extending toward chiasm\",\"modality\":\"brain mri\",\",\"clinical_case\":\"evaluation for galactorrhea and a",
+          "modality": "Brain Mri",
+          "diagnosis": "Pituitary Adenoma",
+          "visual_prediction": "Pituitary Adenoma",
+          "visual_confidence": "90.4%",
+          "finding": "Neuroimaging lesion identified corresponding to primary pathology.",
+          "severity": "Moderate",
+          "clinical_case": "{\"diagnosis\":\"pituitary adenoma\",\"severity\":\"moderate\",\"finding\":\"expanded sella turcica with homogeneous suprasellar mass extending toward chiasm\",\"modality\":\"brain mri\",\",\"clinical_case\":\"evaluation for galactorrhea and a",
+          "recommendations": "Neurosurgical consultation and clinical follow-up imaging.",
+          "class_probabilities": {
+            "Glioma": "0.3%",
+            "Meningioma": "7.5%",
+            "Pituitary Adenoma": "90.4%",
+            "Normal Brain MRI": "1.8%"
+          },
+          "model_metadata": {
+            "parameters": "6.4M",
+            "backbone": "ConvNeXt Visual Stem",
+            "decoder": "Causal Multimodal Transformer",
+            "device": "cuda"
+          }
+        },
+        "Scan: Brain MRI | Question: Explain the clinical case and what happened": {
+          "prompt": "Scan: Brain MRI | Question: Explain the clinical case and what happened",
+          "raw_output": "{\"diagnosis\":\"pituitary adenoma\",\"severity\":\"moderate\",\"finding\":\"expanded sella turcica with homogeneous suprasellar mass extending toward chiasm\",\"modality\":\"brain mri\",\",\"clinical_case\":\"evalualua",
+          "modality": "Brain Mri",
+          "diagnosis": "Pituitary Adenoma",
+          "visual_prediction": "Pituitary Adenoma",
+          "visual_confidence": "90.4%",
+          "finding": "Neuroimaging lesion identified corresponding to primary pathology.",
+          "severity": "Moderate",
+          "clinical_case": "{\"diagnosis\":\"pituitary adenoma\",\"severity\":\"moderate\",\"finding\":\"expanded sella turcica with homogeneous suprasellar mass extending toward chiasm\",\"modality\":\"brain mri\",\",\"clinical_case\":\"evalualua",
+          "recommendations": "Neurosurgical consultation and clinical follow-up imaging.",
+          "class_probabilities": {
+            "Glioma": "0.3%",
+            "Meningioma": "7.5%",
+            "Pituitary Adenoma": "90.4%",
+            "Normal Brain MRI": "1.8%"
+          },
+          "model_metadata": {
+            "parameters": "6.4M",
+            "backbone": "ConvNeXt Visual Stem",
+            "decoder": "Causal Multimodal Transformer",
+            "device": "cuda"
+          }
+        },
+        "Scan: Brain MRI | Query: What pathology is visible in this scan?": {
+          "prompt": "Scan: Brain MRI | Query: What pathology is visible in this scan?",
+          "raw_output": "{\"diagnosis\":\"pituitary adenoma\",\"severity\":\"moderate\",\"finding\":\"sellar and suprasellar mass expanding pituitary fossa with optic chiasm compression\",\"modality\":\"brain mri\",\"clinical_case\":\"patient presented with bitemporal :\":\"",
+          "modality": "Brain Mri",
+          "diagnosis": "Pituitary Adenoma",
+          "visual_prediction": "Pituitary Adenoma",
+          "visual_confidence": "90.4%",
+          "finding": "Neuroimaging lesion identified corresponding to primary pathology.",
+          "severity": "Moderate",
+          "clinical_case": "{\"diagnosis\":\"pituitary adenoma\",\"severity\":\"moderate\",\"finding\":\"sellar and suprasellar mass expanding pituitary fossa with optic chiasm compression\",\"modality\":\"brain mri\",\"clinical_case\":\"patient presented with bitemporal :\":\"",
+          "recommendations": "Neurosurgical consultation and clinical follow-up imaging.",
+          "class_probabilities": {
+            "Glioma": "0.3%",
+            "Meningioma": "7.5%",
+            "Pituitary Adenoma": "90.4%",
+            "Normal Brain MRI": "1.8%"
+          },
+          "model_metadata": {
+            "parameters": "6.4M",
+            "backbone": "ConvNeXt Visual Stem",
+            "decoder": "Causal Multimodal Transformer",
+            "device": "cuda"
+          }
+        },
+        "Scan: Brain MRI | Clinical Request: Provide diagnosis, severity, and recommendations": {
+          "prompt": "Scan: Brain MRI | Clinical Request: Provide diagnosis, severity, and recommendations",
+          "raw_output": "{\"diagnosis\":\"pituitary adenoma\",\"severity\":\"moderate\",\"finding\":\"expanded sella turcica with homogeneous suprasellar mass extending toward chiasm\",\"modality\":\"brain mri\",\"clinical_case\":\"evaluation for galactorrhea and pempem",
+          "modality": "Brain Mri",
+          "diagnosis": "Pituitary Adenoma",
+          "visual_prediction": "Pituitary Adenoma",
+          "visual_confidence": "90.4%",
+          "finding": "expanded sella turcica with homogeneous suprasellar mass extending toward chiasm",
+          "severity": "Moderate",
+          "clinical_case": "evaluation for galactorrhea and pempem",
+          "recommendations": "Neurosurgical consultation and clinical follow-up imaging.",
+          "class_probabilities": {
+            "Glioma": "0.3%",
+            "Meningioma": "7.5%",
+            "Pituitary Adenoma": "90.4%",
+            "Normal Brain MRI": "1.8%"
+          },
+          "model_metadata": {
+            "parameters": "6.4M",
+            "backbone": "ConvNeXt Visual Stem",
+            "decoder": "Causal Multimodal Transformer",
+            "device": "cuda"
+          }
+        }
+      }
+    },
+    {
+      "id": "sample_6",
+      "category": "no_tumor",
+      "label": "Normal Brain MRI (No Pathology)",
+      "severity": "Normal",
+      "filename": "image(1).jpg",
+      "url": "samples/sample_6_no_tumor_image_1.jpg",
+      "default_prediction": {
+        "prompt": "Scan: Brain MRI | Task: Analyze clinical case and diagnose",
+        "raw_output": "{\"diagnosis\":\"normal brain mri\",\"severity\":\"normal\",\"finding\":\"normal brain parenchyma with symmetric ventricles and preserved cortical sulci\",\"modality\":\"brain mri\",\"clinical_case\":\"patient evaluated for nonontecific tent",
+        "modality": "Brain Mri",
+        "diagnosis": "Normal Brain MRI",
+        "visual_prediction": "Normal Brain MRI",
+        "visual_confidence": "99.7%",
+        "finding": "normal brain parenchyma with symmetric ventricles and preserved cortical sulci",
+        "severity": "Normal",
+        "clinical_case": "patient evaluated for nonontecific tent",
+        "recommendations": "Neurosurgical consultation and clinical follow-up imaging.",
+        "class_probabilities": {
+          "Glioma": "0.0%",
+          "Meningioma": "0.2%",
+          "Pituitary Adenoma": "0.0%",
+          "Normal Brain MRI": "99.7%"
+        },
+        "model_metadata": {
+          "parameters": "6.4M",
+          "backbone": "ConvNeXt Visual Stem",
+          "decoder": "Causal Multimodal Transformer",
+          "device": "cuda"
+        }
+      },
+      "predictions_by_prompt": {
+        "Scan: Brain MRI | Task: Analyze clinical case and diagnose": {
+          "prompt": "Scan: Brain MRI | Task: Analyze clinical case and diagnose",
+          "raw_output": "{\"diagnosis\":\"normal brain mri\",\"severity\":\"normal\",\"finding\":\"normal brain parenchyma with symmetric ventricles and preserved cortical sulci\",\"modality\":\"brain mri\",\"clinical_case\":\"patient evaluated for nonontecific tent",
+          "modality": "Brain Mri",
+          "diagnosis": "Normal Brain MRI",
+          "visual_prediction": "Normal Brain MRI",
+          "visual_confidence": "99.7%",
+          "finding": "normal brain parenchyma with symmetric ventricles and preserved cortical sulci",
+          "severity": "Normal",
+          "clinical_case": "patient evaluated for nonontecific tent",
+          "recommendations": "Neurosurgical consultation and clinical follow-up imaging.",
+          "class_probabilities": {
+            "Glioma": "0.0%",
+            "Meningioma": "0.2%",
+            "Pituitary Adenoma": "0.0%",
+            "Normal Brain MRI": "99.7%"
+          },
+          "model_metadata": {
+            "parameters": "6.4M",
+            "backbone": "ConvNeXt Visual Stem",
+            "decoder": "Causal Multimodal Transformer",
+            "device": "cuda"
+          }
+        },
+        "Scan: Brain MRI | Question: Explain the clinical case and what happened": {
+          "prompt": "Scan: Brain MRI | Question: Explain the clinical case and what happened",
+          "raw_output": "{\"diagnosis\":\"normal brain mri\",\"severity\":\"normal\",\"finding\":\"normal brain parenchyma with symmetric ventricles and preserved cortical sulci\",\"modality\":\"brain mri\",\"clinical_case\":\"patient evaluated for evaluated no",
+          "modality": "Brain Mri",
+          "diagnosis": "Normal Brain MRI",
+          "visual_prediction": "Normal Brain MRI",
+          "visual_confidence": "99.7%",
+          "finding": "normal brain parenchyma with symmetric ventricles and preserved cortical sulci",
+          "severity": "Normal",
+          "clinical_case": "patient evaluated for evaluated no",
+          "recommendations": "Neurosurgical consultation and clinical follow-up imaging.",
+          "class_probabilities": {
+            "Glioma": "0.0%",
+            "Meningioma": "0.2%",
+            "Pituitary Adenoma": "0.0%",
+            "Normal Brain MRI": "99.7%"
+          },
+          "model_metadata": {
+            "parameters": "6.4M",
+            "backbone": "ConvNeXt Visual Stem",
+            "decoder": "Causal Multimodal Transformer",
+            "device": "cuda"
+          }
+        },
+        "Scan: Brain MRI | Query: What pathology is visible in this scan?": {
+          "prompt": "Scan: Brain MRI | Query: What pathology is visible in this scan?",
+          "raw_output": "{\"diagnosis\":\"normal brain mri\",\"severity\":\"normal\",\"finding\":\"normal brain parenchyma with symmetric ventricles and preserved cortical sulci\",\"modality\":\"brain mri\",\"clinical_case\":\"patient evaluated for nonon-specifif",
+          "modality": "Brain Mri",
+          "diagnosis": "Normal Brain MRI",
+          "visual_prediction": "Normal Brain MRI",
+          "visual_confidence": "99.7%",
+          "finding": "normal brain parenchyma with symmetric ventricles and preserved cortical sulci",
+          "severity": "Normal",
+          "clinical_case": "patient evaluated for nonon-specifif",
+          "recommendations": "Neurosurgical consultation and clinical follow-up imaging.",
+          "class_probabilities": {
+            "Glioma": "0.0%",
+            "Meningioma": "0.2%",
+            "Pituitary Adenoma": "0.0%",
+            "Normal Brain MRI": "99.7%"
+          },
+          "model_metadata": {
+            "parameters": "6.4M",
+            "backbone": "ConvNeXt Visual Stem",
+            "decoder": "Causal Multimodal Transformer",
+            "device": "cuda"
+          }
+        },
+        "Scan: Brain MRI | Clinical Request: Provide diagnosis, severity, and recommendations": {
+          "prompt": "Scan: Brain MRI | Clinical Request: Provide diagnosis, severity, and recommendations",
+          "raw_output": "{\"diagnosis\":\"normal brain mri\",\"severity\":\"normal\",\"finding\":\"normal brain parenchyma with symmetric ventricles and preserved cortical sulci\",\"modality\":\"brain mri\",\"clinical_case\":\"patient evaluated for non-specific tecenon",
+          "modality": "Brain Mri",
+          "diagnosis": "Normal Brain MRI",
+          "visual_prediction": "Normal Brain MRI",
+          "visual_confidence": "99.7%",
+          "finding": "normal brain parenchyma with symmetric ventricles and preserved cortical sulci",
+          "severity": "Normal",
+          "clinical_case": "patient evaluated for non-specific tecenon",
+          "recommendations": "Neurosurgical consultation and clinical follow-up imaging.",
+          "class_probabilities": {
+            "Glioma": "0.0%",
+            "Meningioma": "0.2%",
+            "Pituitary Adenoma": "0.0%",
+            "Normal Brain MRI": "99.7%"
+          },
+          "model_metadata": {
+            "parameters": "6.4M",
+            "backbone": "ConvNeXt Visual Stem",
+            "decoder": "Causal Multimodal Transformer",
+            "device": "cuda"
+          }
+        }
+      }
+    }
+  ]
+}
