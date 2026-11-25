@@ -7,9 +7,39 @@ let lastDiagnosisResult = null;
 let liveApiOnline = false;
 
 async function init() {
+  initTheme();
   setupDropzone();
   checkApiHealth();
   await loadSamples();
+}
+
+function initTheme() {
+  const saved = localStorage.getItem("medvision_theme") || "light";
+  applyTheme(saved);
+}
+
+function toggleTheme() {
+  const isLight = document.documentElement.classList.contains("light-theme");
+  const next = isLight ? "dark" : "light";
+  localStorage.setItem("medvision_theme", next);
+  applyTheme(next);
+}
+
+function applyTheme(mode) {
+  const html = document.documentElement;
+  const icon = document.getElementById("theme-icon");
+  const label = document.getElementById("theme-label");
+  if (mode === "light") {
+    html.classList.add("light-theme");
+    html.classList.remove("dark");
+    if (icon) icon.innerText = "🌙";
+    if (label) label.innerText = "Dark Mode";
+  } else {
+    html.classList.remove("light-theme");
+    html.classList.add("dark");
+    if (icon) icon.innerText = "☀️";
+    if (label) label.innerText = "Light Mode";
+  }
 }
 
 async function checkApiHealth() {
@@ -79,6 +109,8 @@ function handleFile(file) {
     const badge = document.getElementById("scan-status-badge");
     badge.innerText = `Uploaded (${file.name})`;
     badge.className = "text-[11px] font-mono px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300 border border-cyan-400/30";
+    // Auto-run live inference immediately upon upload
+    runDiagnosis();
   };
   reader.readAsDataURL(file);
 }
@@ -143,7 +175,7 @@ function selectSample(sample, autoRun = false) {
 
 function setPrompt(promptText) {
   document.getElementById("prompt-input").value = promptText;
-  if (activeSample && !activeFile) {
+  if (activeSample || activeFile) {
     runDiagnosis();
   }
 }
@@ -157,7 +189,6 @@ async function runDiagnosis() {
   const promptVal = document.getElementById("prompt-input").value;
   const tempVal = parseFloat(document.getElementById("temp-slider").value) / 100.0;
 
-  // Instant precomputed output for curated samples (when using a preset prompt)
   if (activeSample && !activeFile) {
     const byPrompt = activeSample.predictions_by_prompt || {};
     const result = byPrompt[promptVal] || activeSample.default_prediction;
@@ -168,7 +199,6 @@ async function runDiagnosis() {
     }
   }
 
-  // Live inference via private Oracle backend for uploaded outside images
   const btn = document.getElementById("btn-analyze");
   const btnIcon = document.getElementById("btn-icon");
   const btnText = document.getElementById("btn-text");
