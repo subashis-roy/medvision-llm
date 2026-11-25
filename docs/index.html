@@ -25,7 +25,7 @@
               MedVision-LLM
             </h1>
             <span class="text-[10px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-400/30">
-              Interactive Web Showcase
+              VLM Diagnostic SLM
             </span>
           </div>
           <p class="text-xs text-slate-400">Trained from Scratch • ConvNeXt Visual Stem + Causal Multimodal Transformer (6.4M Parameters)</p>
@@ -33,9 +33,9 @@
       </div>
 
       <div class="flex flex-wrap items-center gap-2.5 text-xs font-mono">
-        <div class="px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-emerald-500/30 text-emerald-300 flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span>Live Browser Demo (No Download)</span>
+        <div id="api-health-badge" class="px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-emerald-500/30 text-emerald-300 flex items-center gap-2">
+          <span id="api-health-dot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span id="api-health-text">Connecting Live API...</span>
         </div>
         <div class="px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-white/10 text-cyan-300">
           10,287 Brain MRI Scans
@@ -49,7 +49,7 @@
     <!-- Main Workspace Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
 
-      <!-- Left Column: MRI Viewport & Curated Samples (5 cols) -->
+      <!-- Left Column: MRI Ingestion & Sample Scans (5 cols) -->
       <div class="lg:col-span-5 space-y-4">
 
         <!-- Scan Viewport Card -->
@@ -59,17 +59,30 @@
               🔬 Medical Scan Viewport
             </h2>
             <span id="scan-status-badge" class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-white/10">
-              Loading...
+              Ready
             </span>
           </div>
 
-          <div class="relative w-full aspect-square max-h-[380px] bg-slate-950/70 rounded-xl overflow-hidden flex flex-col items-center justify-center p-4 text-center border border-white/10">
-            <img id="scan-preview" class="hidden w-full h-full object-contain select-none" alt="Selected Brain MRI Scan" />
+          <!-- Dropzone / Image Display (Restored for Live Uploads) -->
+          <div
+            id="dropzone"
+            onclick="document.getElementById('file-input').click()"
+            class="scan-dropzone relative w-full aspect-square max-h-[380px] bg-slate-950/70 rounded-xl overflow-hidden cursor-pointer flex flex-col items-center justify-center p-4 text-center group"
+          >
+            <img id="scan-preview" class="hidden w-full h-full object-contain select-none" alt="Brain MRI Scan Preview" />
             <div id="drop-placeholder" class="space-y-2 text-slate-400">
-              <span class="text-4xl block">🩻</span>
-              <div class="text-xs font-semibold text-white">Select a Verified Brain MRI Scan Below</div>
-              <div class="text-[11px] font-mono text-slate-500">Authentic pre-evaluated model outputs across all 4 pathology classes</div>
+              <span class="text-4xl block group-hover:scale-110 transition duration-200">🩻</span>
+              <div class="text-xs font-semibold text-white">Click or Drag &amp; Drop Any Brain MRI Scan</div>
+              <div class="text-[11px] font-mono text-slate-500">Live RAM-only inference (JPG, PNG) • Zero files stored</div>
             </div>
+            <input id="file-input" type="file" accept="image/*" class="hidden" onchange="handleFileSelect(event)" />
+          </div>
+
+          <div class="flex items-center justify-between text-[11px] font-mono text-slate-400">
+            <span>Click viewport above to upload your own MRI scan</span>
+            <button onclick="document.getElementById('file-input').click()" class="px-2.5 py-1 rounded-lg bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-400/30 text-cyan-300 transition">
+              ⬆ Upload Scan
+            </button>
           </div>
 
           <!-- Visual Tokenizer Grid Telemetry -->
@@ -121,9 +134,13 @@
         <div class="glass-panel rounded-2xl p-5 space-y-4">
           <div class="flex items-center justify-between border-b border-white/10 pb-3">
             <h2 class="text-sm font-bold text-white uppercase tracking-wider font-mono">
-              💬 Clinical Question & Diagnostic Task
+              💬 Clinical Question &amp; Diagnostic Task
             </h2>
-            <span class="text-[11px] font-mono text-cyan-300">T = 0.40 (Verified Benchmark Output)</span>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-mono text-slate-400">Temperature:</span>
+              <input id="temp-slider" type="range" min="10" max="80" value="40" oninput="document.getElementById('temp-label').innerText = (this.value/100).toFixed(2)" class="w-20 accent-cyan-400" />
+              <span id="temp-label" class="text-xs font-mono text-cyan-300 font-bold">0.40</span>
+            </div>
           </div>
 
           <!-- Prompt Preset Chips -->
@@ -131,28 +148,27 @@
             <label class="text-[11px] font-mono text-slate-400">DIAGNOSTIC PROMPT PRESETS:</label>
             <div class="flex flex-wrap gap-2 text-xs font-mono">
               <button onclick="setPrompt('Scan: Brain MRI | Task: Analyze clinical case and diagnose')" class="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-400/40 text-cyan-200 transition">
-                📋 Full Clinical Case & Diagnosis
+                📋 Full Clinical Case &amp; Diagnosis
               </button>
               <button onclick="setPrompt('Scan: Brain MRI | Question: Explain the clinical case and what happened')" class="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-violet-500/20 border border-white/10 hover:border-violet-400/40 text-violet-200 transition">
                 🩺 What Happened? (Case Narrative)
               </button>
               <button onclick="setPrompt('Scan: Brain MRI | Query: What pathology is visible in this scan?')" class="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-pink-500/20 border border-white/10 hover:border-pink-400/40 text-pink-200 transition">
-                🔍 Pathology & Tumor Finding
+                🔍 Pathology &amp; Tumor Finding
               </button>
               <button onclick="setPrompt('Scan: Brain MRI | Clinical Request: Provide diagnosis, severity, and recommendations')" class="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-400/40 text-emerald-200 transition">
-                ⚡ Severity & Actions
+                ⚡ Severity &amp; Actions
               </button>
             </div>
           </div>
 
-          <!-- Active Prompt Display + Run Button -->
+          <!-- Custom Prompt Input + Run Button -->
           <div class="flex gap-2">
             <input
               id="prompt-input"
               type="text"
-              readonly
               value="Scan: Brain MRI | Task: Analyze clinical case and diagnose"
-              class="flex-1 bg-slate-950 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none font-mono"
+              class="flex-1 bg-slate-950 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 font-mono"
             />
             <button
               id="btn-analyze"
@@ -229,7 +245,7 @@
               <span>Case Narrative ("What Happened"):</span>
             </h3>
             <div id="res-case" class="p-4 rounded-xl bg-slate-950/70 border border-white/5 text-xs text-slate-300 leading-relaxed min-h-[72px]">
-              Select a verified MRI sample on the left and click "Run Diagnosis" to inspect the generated clinical case evaluation.
+              Upload an MRI scan or click a verified sample on the left, then click "Run Diagnosis" to inspect the generated clinical case evaluation.
             </div>
           </div>
 
@@ -268,7 +284,7 @@
             <span>🔒 Source Code &amp; Model Weights Availability</span>
           </h2>
           <p class="text-xs text-slate-300 leading-relaxed max-w-4xl">
-            This live web interface is provided for direct browser inspection without requiring local downloads. Full training pipelines, inference source code, and model weights are withheld from public download during ongoing research and peer-review evaluation, and <strong>will be revealed upon reasonable academic, reviewer, or PhD admissions committee request</strong>.
+            This live web interface runs real-time inference via a private backend without requiring local downloads. Full training pipelines, inference source code, and model weights are withheld from public download during ongoing research and peer-review evaluation, and <strong>will be revealed upon reasonable academic, reviewer, or PhD admissions committee request</strong>.
           </p>
         </div>
         <a href="https://github.com/subashis-dev/medvision-llm/issues/new?title=Code%20Access%20Request%20-%20MedVision-LLM" target="_blank" rel="noopener" class="px-4 py-2 rounded-xl bg-violet-500/20 hover:bg-violet-500/30 border border-violet-400/40 text-violet-200 text-xs font-mono font-bold transition shrink-0">
@@ -276,7 +292,7 @@
         </a>
       </div>
       <p class="text-[11px] font-mono text-slate-500">
-        Research &amp; Educational Demonstration Only — Not intended for clinical diagnosis, screening, or treatment decisions.
+        Research &amp; Educational Demonstration Only — Uploaded scans are processed strictly in RAM and never stored. Not intended for clinical diagnosis, screening, or treatment decisions.
       </p>
     </section>
 

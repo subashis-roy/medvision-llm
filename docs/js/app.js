@@ -1,9 +1,86 @@
+const API_BASE = "https://medvision-api.subashis.com";
+
 let samplesList = [];
+let activeFile = null;
 let activeSample = null;
 let lastDiagnosisResult = null;
+let liveApiOnline = false;
 
 async function init() {
+  setupDropzone();
+  checkApiHealth();
   await loadSamples();
+}
+
+async function checkApiHealth() {
+  const badge = document.getElementById("api-health-badge");
+  const dot = document.getElementById("api-health-dot");
+  const text = document.getElementById("api-health-text");
+  try {
+    const res = await fetch(`${API_BASE}/api/health`, { method: "GET" });
+    if (res.ok) {
+      liveApiOnline = true;
+      text.innerText = "Live Upload API: Online";
+      badge.className = "px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-emerald-500/30 text-emerald-300 flex items-center gap-2";
+      dot.className = "w-2 h-2 rounded-full bg-emerald-400 animate-pulse";
+      return;
+    }
+  } catch (e) {
+    // Fallback to static sample mode
+  }
+  liveApiOnline = false;
+  text.innerText = "Curated Samples Mode";
+  badge.className = "px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-amber-500/30 text-amber-300 flex items-center gap-2";
+  dot.className = "w-2 h-2 rounded-full bg-amber-400";
+}
+
+function setupDropzone() {
+  const dropzone = document.getElementById("dropzone");
+
+  ["dragenter", "dragover"].forEach((eventName) => {
+    dropzone.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      dropzone.classList.add("dragover");
+    });
+  });
+
+  ["dragleave", "drop"].forEach((eventName) => {
+    dropzone.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      dropzone.classList.remove("dragover");
+    });
+  });
+
+  dropzone.addEventListener("drop", (e) => {
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      handleFile(files[0]);
+    }
+  });
+}
+
+function handleFileSelect(event) {
+  const files = event.target.files;
+  if (files.length > 0) {
+    handleFile(files[0]);
+  }
+}
+
+function handleFile(file) {
+  activeFile = file;
+  activeSample = null;
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const preview = document.getElementById("scan-preview");
+    preview.src = e.target.result;
+    preview.classList.remove("hidden");
+    document.getElementById("drop-placeholder").classList.add("hidden");
+    const badge = document.getElementById("scan-status-badge");
+    badge.innerText = `Uploaded (${file.name})`;
+    badge.className = "text-[11px] font-mono px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300 border border-cyan-400/30";
+  };
+  reader.readAsDataURL(file);
 }
 
 async function loadSamples() {
@@ -43,11 +120,11 @@ async function loadSamples() {
     }
   } catch (err) {
     console.error("Failed to load precomputed samples:", err);
-    document.getElementById("scan-status-badge").innerText = "Load Error";
   }
 }
 
 function selectSample(sample, autoRun = false) {
+  activeFile = null;
   activeSample = sample;
 
   const preview = document.getElementById("scan-preview");
@@ -66,24 +143,66 @@ function selectSample(sample, autoRun = false) {
 
 function setPrompt(promptText) {
   document.getElementById("prompt-input").value = promptText;
-  if (activeSample) {
+  if (activeSample && !activeFile) {
     runDiagnosis();
   }
 }
 
-function runDiagnosis() {
-  if (!activeSample) {
-    alert("Please select a verified sample scan first.");
+async function runDiagnosis() {
+  if (!activeFile && !activeSample) {
+    alert("Please upload an MRI scan or select a verified sample first.");
     return;
   }
 
   const promptVal = document.getElementById("prompt-input").value;
-  const byPrompt = activeSample.predictions_by_prompt || {};
-  const result = byPrompt[promptVal] || activeSample.default_prediction;
+  const tempVal = parseFloat(document.getElementById("temp-slider").value) / 100.0;
 
-  if (!result) return;
-  lastDiagnosisResult = result;
-  renderDiagnosis(result);
+  // Instant precomputed output for curated samples (when using a preset prompt)
+  if (activeSample && !activeFile) {
+    const byPrompt = activeSample.predictions_by_prompt || {};
+    const result = byPrompt[promptVal] || activeSample.default_prediction;
+    if (result) {
+      lastDiagnosisResult = result;
+      renderDiagnosis(result);
+      return;
+    }
+  }
+
+  // Live inference via private Oracle backend for uploaded outside images
+  const btn = document.getElementById("btn-analyze");
+  const btnIcon = document.getElementById("btn-icon");
+  const btnText = document.getElementById("btn-text");
+
+  btn.disabled = true;
+  btnIcon.innerText = "🌀";
+  btnIcon.classList.add("animate-spin");
+  btnText.innerText = "Diagnosing...";
+
+  const formData = new FormData();
+  formData.append("file", activeFile);
+  formData.append("prompt", promptVal);
+  formData.append("temperature", tempVal);
+
+  try {
+    const res = await fetch(`${API_BASE}/api/analyze`, {
+      method: "POST",
+      body: formData,
+    });
+    if (!res.ok) {
+      const errBody = await res.text();
+      throw new Error(`HTTP ${res.status}: ${errBody}`);
+    }
+    const data = await res.json();
+    lastDiagnosisResult = data;
+    renderDiagnosis(data);
+  } catch (err) {
+    alert("Live inference error: " + err.message);
+  } finally {
+    btn.disabled = false;
+    btnIcon.innerText = "⚡";
+    btnIcon.classList.remove("animate-spin");
+    btnText.innerText = "Run Diagnosis";
+  }
 }
 
 function renderDiagnosis(data) {
@@ -117,7 +236,7 @@ function renderDiagnosis(data) {
 
 function exportDossier(fmt) {
   if (!lastDiagnosisResult) {
-    alert("Please select a scan first to export the dossier.");
+    alert("Please run a diagnosis first to export the dossier.");
     return;
   }
 
